@@ -18,6 +18,12 @@ class TriageGame {
         this.playerName = "";
         this.highScore = localStorage.getItem("highScore") || 0;
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+        // Ensure UI is reset when page loads
+        document.getElementById("player-input").style.display = "block";
+        document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
+        document.getElementById("score").textContent = `Score: ${this.score}`;
+        document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
     }
 
     loadPatients() {
@@ -100,10 +106,10 @@ class TriageGame {
         }
 
         const patient = this.patients[this.currentPatientIndex];
-        document.getElementById("patient-info").color: white = `
-            <p style="font-size: 22px; color: #ffcc00; text-align: left;"><strong>👁️ Appearance:</strong> ${patient.appearance}</p>
-            <p style="font-size: 20px; color: #ff6666; text-align: left;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
-            <p style="font-size: 20px; color: #66ff66; text-align: left;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
+        document.getElementById("patient-info").innerHTML = `
+            <p style="font-size: 22px; color: white; text-align: left;"><strong>👁️ Appearance:</strong> ${patient.appearance}</p>
+            <p style="font-size: 20px; color: white; text-align: left;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
+            <p style="font-size: 20px; color: white; text-align: left;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
         `;
     }
 
