@@ -4,160 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAMP Triage Training Game</title>
-
-    <!-- Google Fonts: Arcade-Style -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
-    <style>
-        /* General Page Styles */
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background: url('background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-            color: white;
-            overflow: hidden;
-        }
-
-        /* Dark Overlay for Readability */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: -1;
-        }
-
-        /* Game Title - Arcade Font */
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24px;
-            text-transform: uppercase;
-            text-shadow: 4px 4px 5px rgba(255, 255, 255, 0.3);
-            color: #ffcc00;
-            margin-bottom: 20px;
-        }
-
-        /* Game Container */
-        #game-container {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-            width: 60%;
-            max-width: 800px;
-            position: relative;
-        }
-
-        /* Player Input */
-        #player-input {
-            margin-bottom: 20px;
-        }
-
-        #player-name {
-            padding: 10px;
-            font-size: 18px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-        }
-
-        #start-button {
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #ffcc00;
-            color: black;
-            font-weight: bold;
-            transition: 0.3s;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        #start-button:hover {
-            background-color: #ff9900;
-        }
-
-        /* Score & Timer */
-        #scoreboard {
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-family: 'Press Start 2P', cursive;
-            color: #ffcc00;
-        }
-
-        /* Triage Buttons Container */
-        #triage-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        /* Arcade-Style Circular Buttons */
-        .triage-button {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 4px solid white;
-            cursor: pointer;
-            box-shadow: inset -4px -4px 6px rgba(0, 0, 0, 0.4), 
-                        inset 4px 4px 6px rgba(255, 255, 255, 0.3),
-                        0 0 12px rgba(255, 255, 255, 0.4);
-            transition: 0.2s ease-in-out;
-        }
-
-        /* Button Colors */
-        .red { background: radial-gradient(circle, #ff4444, #cc0000); }
-        .yellow { background: radial-gradient(circle, #ffff66, #ffcc00); }
-        .green { background: radial-gradient(circle, #66ff66, #009900); }
-        .black { background: radial-gradient(circle, #666666, #000000); }
-
-        /* Hover Effects */
-        .triage-button:hover {
-            transform: scale(1.1);
-            box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.6), 
-                        inset 2px 2px 6px rgba(255, 255, 255, 0.4),
-                        0 0 18px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Pressed Effect */
-        .triage-button:active {
-            transform: scale(0.95);
-            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), 
-                        inset -4px -4px 8px rgba(255, 255, 255, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Score and Timer Positioned Above the Game Box -->
+    <div id="score-container">
+        <div id="timer">Time Left: 30s</div>
+        <div id="score">Score: 0</div>
+        <div id="high-score">High Score: 0</div>
+    </div>
+
+    <!-- Main Game Container -->
     <div id="game-container">
-        <h1>🚑 RAMP Triage Training Game</h1>
-        
-        <!-- Player Name Input -->
-        <div id="player-input">
-            <input type="text" id="player-name" placeholder="Enter Your Name">
-            <button id="start-button" onclick="game.startGame()">Start Game</button>
+        <h1 id="game-title">🚑 RAMP Triage Training Game</h1>
+
+        <!-- Patient Information Display -->
+        <div id="patient-info">
+            <p><strong>📝 Appearance:</strong> Waiting for patient...</p>
+            <p><strong>🧠 Mentation:</strong> --</p>
+            <p><strong>❤️ Pulse:</strong> --</p>
         </div>
 
-        <div id="scoreboard">
-            <p id="timer">Time Left: 30s</p>
-            <p id="score">Score: 0</p>
-            <p id="high-score">High Score: 0</p>
-        </div>
-
-        <div id="patient-info"></div>
-
+        <!-- Triage Buttons -->
         <div id="triage-buttons">
             <button class="triage-button red" onclick="game.triage('Red')"></button>
             <button class="triage-button yellow" onclick="game.triage('Yellow')"></button>
@@ -165,10 +34,16 @@
             <button class="triage-button black" onclick="game.triage('Black')"></button>
         </div>
 
+        <!-- Player Input & Start Game -->
+        <div id="player-input">
+            <input type="text" id="player-name" placeholder="Enter your name">
+            <button onclick="game.startGame()">Start Game</button>
+        </div>
+
+        <!-- Leaderboard -->
         <div id="leaderboard"></div>
     </div>
 
-    <!-- Include JavaScript -->
     <script src="game.js"></script>
 </body>
 </html>
