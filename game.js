@@ -19,10 +19,11 @@ class TriageGame {
         this.highScore = localStorage.getItem("highScore") || 0;
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-        // 🎵 Load arcade music from GitHub Pages
+        // 🎵 Load arcade music with autoplay fixes
         this.music = new Audio("https://TylerChristifulli.github.io/triage-game/arcade_music.mp3");
         this.music.loop = true;
-        this.music.volume = 0.5; // Adjust volume as needed
+        this.music.volume = 1.0; // Max volume
+        this.music.muted = false; // Ensure it's not muted
     }
 
     loadPatients() {
@@ -82,7 +83,9 @@ class TriageGame {
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
         document.getElementById("leaderboard").innerHTML = "";
 
-        // 🎵 Play music after user interaction
+        // 🎵 Ensure the music is unmuted and play after user interaction
+        this.music.muted = false;
+        this.music.volume = 1.0;
         this.music.play().then(() => {
             console.log("Music started successfully! 🎶");
         }).catch(error => {
