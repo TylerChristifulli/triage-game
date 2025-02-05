@@ -72,6 +72,7 @@ body {
 }
 
 /* Triage Buttons */
+/* Remove default hover effect */
 .triage-button {
     width: 80px;
     height: 80px;
@@ -80,6 +81,20 @@ body {
     margin: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Individual hover colors matching each button */
+.red:hover { background-color: darkred; }
+.yellow:hover { background-color: gold; }
+.green:hover { background-color: darkgreen; }
+.black:hover { background-color: grey; }
+
+/* Add a cool hover effect (button pops slightly) */
+.triage-button:hover {
+    transform: scale(1.1);
+}
+
 }
 
 .red { background-color: red; }
