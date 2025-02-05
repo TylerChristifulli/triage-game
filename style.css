@@ -6,7 +6,7 @@ body, h1, #timer, #score, #high-score, #leaderboard {
     font-family: 'Press Start 2P', cursive;
 }
 
-/* Use a normal font (Arial) for patient scenario text & Left Align */
+/* Use a normal font (Arial) for patient scenario text */
 #patient-info {
     font-family: Arial, sans-serif;
     font-size: 18px;
@@ -14,7 +14,7 @@ body, h1, #timer, #score, #high-score, #leaderboard {
     background: rgba(0, 0, 0, 0.7);
     padding: 15px;
     border-radius: 10px;
-    text-align: left;  /* ⬅️ Left-align the text */
+    text-align: center;  /* ⬅️ Left-align the text */
     width: 80%;
     color: white;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
