@@ -28,15 +28,16 @@ class TriageGame {
     }
 
     startGame() {
-        // Get player name from input
-        this.playerName = document.getElementById("player-name").value.trim();
+        let playerName = document.getElementById("player-name").value.trim();
 
-        if (!this.playerName) {
+        if (!playerName) {
             alert("Please enter your name before starting!");
             return;
         }
 
-        // Hide the name input and start button
+        this.playerName = playerName; // Store player name
+
+        // Hide the name input and start button after starting
         document.getElementById("player-input").style.display = "none";
 
         this.score = 0;
@@ -47,6 +48,7 @@ class TriageGame {
         document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
         document.getElementById("score").textContent = `Score: ${this.score}`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
+        document.getElementById("leaderboard").innerHTML = ""; // Clear leaderboard display
 
         this.startTimer();
         this.displayPatient();
@@ -117,6 +119,9 @@ class TriageGame {
         document.getElementById("leaderboard").innerHTML = leaderboardHTML;
         document.getElementById("patient-info").innerHTML = `<h2>🎉 Time's Up! Final Score: ${this.score}</h2>`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
+        
+        // Show the input box and start button again for a new game
+        document.getElementById("player-input").style.display = "block";
     }
 }
 
