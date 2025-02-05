@@ -100,7 +100,7 @@ class TriageGame {
         }
 
         const patient = this.patients[this.currentPatientIndex];
-        document.getElementById("patient-info").innerHTML = `
+        document.getElementById("patient-info").color: white = `
             <p style="font-size: 22px; color: #ffcc00; text-align: left;"><strong>👁️ Appearance:</strong> ${patient.appearance}</p>
             <p style="font-size: 20px; color: #ff6666; text-align: left;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
             <p style="font-size: 20px; color: #66ff66; text-align: left;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
