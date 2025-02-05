@@ -1,33 +1,111 @@
-/* Triage Buttons - Bigger, Bolder, and Glow Effect */
-.triage-button {
-    font-size: 22px; /* Bigger text */
-    padding: 18px 35px; /* Larger button size */
-    margin: 12px;
-    border: 3px solid white; /* Keep the white outline */
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-block;
-    width: 220px; /* Wider button */
-    text-transform: uppercase;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4); /* Default glow effect */
-    transition: 0.3s ease-in-out;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAMP Triage Training Game</title>
+    <style>
+        /* Background Image & Opacity */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
 
-/* Button Colors */
-.red { background-color: red; color: white; }
-.yellow { background-color: yellow; color: black; }
-.green { background-color: green; color: white; }
-.black { background-color: black; color: white; }
+        /* Overlay to Reduce Brightness */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Slightly dimmed */
+            z-index: -1;
+        }
 
-/* 🚀 Hover Effect - Glow Effect */
-.triage-button:hover {
-    transform: scale(1.1); /* Slightly bigger on hover */
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.8); /* Stronger glow */
-}
+        /* Game Container - Modern Card Design */
+        #game-container {
+            background: rgba(0, 0, 0, 0.8); /* Dark transparent */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            width: 60%;
+            max-width: 800px;
+            position: relative;
+        }
 
-/* ⬇ Pressed Effect */
-.triage-button:active {
-    transform: scale(0.95); /* Shrinks slightly when clicked */
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* Softer glow */
-}
+        /* Patient Info Box */
+        #patient-info {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: black;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        /* Triage Buttons - Bigger, Bolder, and Glow Effect */
+        .triage-button {
+            font-size: 22px;
+            padding: 18px 35px;
+            margin: 12px;
+            border: 3px solid white; /* White outline */
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            width: 220px;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Button Colors */
+        .red { background-color: red; color: white; }
+        .yellow { background-color: yellow; color: black; }
+        .green { background-color: green; color: white; }
+        .black { background-color: black; color: white; }
+
+        /* Hover Effect - Glow Effect */
+        .triage-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Pressed Effect */
+        .triage-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>🚑 RAMP Triage Training Game</h1>
+        
+        <!-- Display Patient Information -->
+        <div id="patient-info"></div>
+
+        <!-- Triage Buttons -->
+        <h2>Select the Correct Triage Category</h2>
+        <button class="triage-button red" onclick="game.triage('Red')">🔴 Red (Immediate)</button>
+        <button class="triage-button yellow" onclick="game.triage('Yellow')">🟡 Yellow (Delayed)</button>
+        <button class="triage-button green" onclick="game.triage('Green')">🟢 Green (Minimal)</button>
+        <button class="triage-button black" onclick="game.triage('Black')">⚫ Black (Expectant)</button>
+    </div>
+
+    <!-- Load JavaScript File -->
+    <script src="game.js"></script>
+</body>
+</html>
