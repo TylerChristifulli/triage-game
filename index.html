@@ -28,13 +28,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Slightly dimmed */
+            background: rgba(0, 0, 0, 0.2);
             z-index: -1;
         }
 
-        /* Game Container - Modern Card Design */
+        /* Game Container */
         #game-container {
-            background: rgba(0, 0, 0, 0.8); /* Dark transparent */
+            background: rgba(0, 0, 0, 0.8);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
@@ -54,25 +54,31 @@
             font-size: 18px;
         }
 
-        /* Triage Buttons Container - Side-by-Side Layout */
+        /* Score & Timer */
+        #scoreboard {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Triage Buttons */
         #triage-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Space between buttons */
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            gap: 20px;
+            flex-wrap: wrap;
             margin-top: 20px;
         }
 
         /* Arcade-Style Circular Buttons */
         .triage-button {
-            width: 100px; /* Circular */
+            width: 100px;
             height: 100px;
             border-radius: 50%;
-            border: 4px solid white; /* White outline */
+            border: 4px solid white;
             cursor: pointer;
             box-shadow: inset -4px -4px 6px rgba(0, 0, 0, 0.4), 
                         inset 4px 4px 6px rgba(255, 255, 255, 0.3),
-                        0 0 12px rgba(255, 255, 255, 0.4); /* 3D effect */
+                        0 0 12px rgba(255, 255, 255, 0.4);
             transition: 0.2s ease-in-out;
         }
 
@@ -82,7 +88,7 @@
         .green { background: radial-gradient(circle, #66ff66, #009900); }
         .black { background: radial-gradient(circle, #666666, #000000); }
 
-        /* Hover Effect - Shine and Expand */
+        /* Hover Effect */
         .triage-button:hover {
             transform: scale(1.1);
             box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.6), 
@@ -90,7 +96,7 @@
                         0 0 18px rgba(255, 255, 255, 0.8);
         }
 
-        /* Pressed Effect - Push Down */
+        /* Pressed Effect */
         .triage-button:active {
             transform: scale(0.95);
             box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), 
@@ -101,12 +107,12 @@
 <body>
     <div id="game-container">
         <h1>🚑 RAMP Triage Training Game</h1>
-        
-        <!-- Display Patient Information -->
+        <div id="scoreboard">
+            <p id="timer">Time Left: 30s</p>
+            <p id="score">Score: 0</p>
+            <p id="high-score">High Score: 0</p>
+        </div>
         <div id="patient-info"></div>
-
-        <!-- Triage Buttons (Arcade-Style) -->
-        <h2>Select the Correct Triage Category</h2>
         <div id="triage-buttons">
             <button class="triage-button red" onclick="game.triage('Red')"></button>
             <button class="triage-button yellow" onclick="game.triage('Yellow')"></button>
@@ -114,8 +120,7 @@
             <button class="triage-button black" onclick="game.triage('Black')"></button>
         </div>
     </div>
-
-    <!-- Load JavaScript File -->
     <script src="game.js"></script>
 </body>
 </html>
+
