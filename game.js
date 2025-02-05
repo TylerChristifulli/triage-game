@@ -15,7 +15,7 @@ class TriageGame {
         this.score = 0;
         this.timer = 30; // 30-second timer
         this.timerInterval = null;
-        this.highScore = localStorage.getItem("highScore") || 0; // Store high score in browser
+        this.highScore = localStorage.getItem("highScore") || 0; // Retrieve stored high score
     }
 
     loadPatients() {
@@ -44,17 +44,18 @@ class TriageGame {
         this.currentPatientIndex = 0;
         document.getElementById("score").textContent = `Score: ${this.score}`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
+        document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
         this.displayPatient();
         this.startTimer();
     }
 
     startTimer() {
-        clearInterval(this.timerInterval);
+        clearInterval(this.timerInterval); // Clear any existing timers
         this.timerInterval = setInterval(() => {
-            this.timer--;
-            document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
-
-            if (this.timer <= 0) {
+            if (this.timer > 0) {
+                this.timer--;
+                document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
+            } else {
                 clearInterval(this.timerInterval);
                 this.endGame();
             }
@@ -76,6 +77,7 @@ class TriageGame {
     }
 
     endGame() {
+        clearInterval(this.timerInterval); // Stop the timer when the game ends
         if (this.score > this.highScore) {
             this.highScore = this.score;
             localStorage.setItem("highScore", this.highScore);
@@ -86,5 +88,9 @@ class TriageGame {
     }
 }
 
-const game = new TriageGame();
-game.startGame();
+// Ensure the game starts when the page loads
+window.onload = () => {
+    const game = new TriageGame();
+    game.startGame();
+    window.game = game; // Ensure `game` is accessible globally
+};
