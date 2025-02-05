@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAMP Triage Training Game</title>
+    <style>
+        /* Center all content */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Style patient info box */
+        #patient-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            width: 50%;
+        }
+
+        /* Style buttons */
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Different colors for triage categories */
+        button:nth-child(1) { background-color: red; color: white; }
+        button:nth-child(2) { background-color: yellow; color: black; }
+        button:nth-child(3) { background-color: green; color: white; }
+        button:nth-child(4) { background-color: black; color: white; }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚑 RAMP Triage Training Game</h1>
+    
+    <!-- Display Patient Information -->
+    <div id="patient-info"></div>
+
+    <!-- Triage Buttons -->
+    <h2>Select the Correct Triage Category</h2>
+    <button onclick="game.triage('Red')">🔴 Red (Immediate)</button>
+    <button onclick="game.triage('Yellow')">🟡 Yellow (Delayed)</button>
+    <button onclick="game.triage('Green')">🟢 Green (Minimal)</button>
+    <button onclick="game.triage('Black')">⚫ Black (Expectant)</button>
+
+    <!-- Load JavaScript File -->
+    <script src="game.js"></script>
+</body>
+</html>
