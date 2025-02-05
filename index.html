@@ -6,8 +6,6 @@
     <title>RAMP Triage Training Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
 
     <!-- Score and Timer Positioned Above the Game Box -->
@@ -23,7 +21,7 @@
 
         <!-- Patient Information Display -->
         <div id="patient-info">
-            <p><strong>📝 Appearance:</strong> Waiting for patient...</p>
+            <p><strong>👁️ Appearance:</strong> Waiting for patient...</p>
             <p><strong>🧠 Mentation:</strong> --</p>
             <p><strong>❤️ Pulse:</strong> --</p>
         </div>
@@ -37,16 +35,21 @@
         </div>
 
         <!-- Player Input & Start Game -->
-       <div id="player-input">
-    <input type="text" id="player-name" placeholder="Enter your name">
-    <button id="start-button">Start Game</button>
-</div>
-
+        <div id="player-input">
+            <input type="text" id="player-name" placeholder="Enter your name">
+            <button id="start-button">Start Game</button>
+        </div>
 
         <!-- Leaderboard -->
         <div id="leaderboard"></div>
     </div>
 
     <script src="game.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("start-button").addEventListener("click", () => game.startGame());
+        });
+    </script>
+
 </body>
 </html>
