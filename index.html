@@ -54,40 +54,48 @@
             font-size: 18px;
         }
 
-        /* Triage Buttons - Bigger, Bolder, and Glow Effect */
+        /* Triage Buttons Container - Side-by-Side Layout */
+        #triage-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between buttons */
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            margin-top: 20px;
+        }
+
+        /* Arcade-Style Circular Buttons */
         .triage-button {
-            font-size: 22px;
-            padding: 18px 35px;
-            margin: 12px;
-            border: 3px solid white; /* White outline */
-            border-radius: 12px;
+            width: 100px; /* Circular */
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white; /* White outline */
             cursor: pointer;
-            font-weight: bold;
-            display: inline-block;
-            width: 220px;
-            text-transform: uppercase;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-            transition: 0.3s ease-in-out;
+            box-shadow: inset -4px -4px 6px rgba(0, 0, 0, 0.4), 
+                        inset 4px 4px 6px rgba(255, 255, 255, 0.3),
+                        0 0 12px rgba(255, 255, 255, 0.4); /* 3D effect */
+            transition: 0.2s ease-in-out;
         }
 
         /* Button Colors */
-        .red { background-color: red; color: white; }
-        .yellow { background-color: yellow; color: black; }
-        .green { background-color: green; color: white; }
-        .black { background-color: black; color: white; }
+        .red { background: radial-gradient(circle, #ff4444, #cc0000); }
+        .yellow { background: radial-gradient(circle, #ffff66, #ffcc00); }
+        .green { background: radial-gradient(circle, #66ff66, #009900); }
+        .black { background: radial-gradient(circle, #666666, #000000); }
 
-        /* Hover Effect - Glow Effect */
+        /* Hover Effect - Shine and Expand */
         .triage-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+            box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.6), 
+                        inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+                        0 0 18px rgba(255, 255, 255, 0.8);
         }
 
-        /* Pressed Effect */
+        /* Pressed Effect - Push Down */
         .triage-button:active {
             transform: scale(0.95);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), 
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.2);
         }
-
     </style>
 </head>
 <body>
@@ -97,12 +105,14 @@
         <!-- Display Patient Information -->
         <div id="patient-info"></div>
 
-        <!-- Triage Buttons -->
+        <!-- Triage Buttons (Arcade-Style) -->
         <h2>Select the Correct Triage Category</h2>
-        <button class="triage-button red" onclick="game.triage('Red')">🔴 Red (Immediate)</button>
-        <button class="triage-button yellow" onclick="game.triage('Yellow')">🟡 Yellow (Delayed)</button>
-        <button class="triage-button green" onclick="game.triage('Green')">🟢 Green (Minimal)</button>
-        <button class="triage-button black" onclick="game.triage('Black')">⚫ Black (Expectant)</button>
+        <div id="triage-buttons">
+            <button class="triage-button red" onclick="game.triage('Red')"></button>
+            <button class="triage-button yellow" onclick="game.triage('Yellow')"></button>
+            <button class="triage-button green" onclick="game.triage('Green')"></button>
+            <button class="triage-button black" onclick="game.triage('Black')"></button>
+        </div>
     </div>
 
     <!-- Load JavaScript File -->
