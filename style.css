@@ -1,0 +1,118 @@
+/* General Page Styling */
+body {
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Press Start 2P', cursive; /* Arcade-style font */
+    color: white;
+    text-align: center;
+}
+
+/* Score & Timer Styling */
+#score-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    color: yellow;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+}
+
+#timer, #score, #high-score {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 150px;
+}
+
+/* Main Game Box */
+#game-container {
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Game Title */
+#game-title {
+    font-size: 32px;
+    color: yellow;
+    text-shadow: 3px 3px 5px black;
+}
+
+/* Patient Information Box */
+#patient-info {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto;
+    width: 80%;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Triage Buttons */
+.triage-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.red { background-color: red; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+.black { background-color: black; }
+
+/* Player Input & Start Button */
+#player-input {
+    margin-top: 20px;
+}
+
+#player-name {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: darkred;
+}
+
+/* Leaderboard */
+#leaderboard {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
