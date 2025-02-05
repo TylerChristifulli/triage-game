@@ -1,10 +1,31 @@
-/* General Page Styling */
+/* Import Arcade Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Apply arcade-style font to everything EXCEPT patient info */
+body, h1, #timer, #score, #high-score, #leaderboard {
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Use a normal font (Arial) for patient scenario text */
+#patient-info {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Background Styling */
 body {
     background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'Press Start 2P', cursive; /* Arcade-style font */
-    color: white;
     text-align: center;
+    color: white;
 }
 
 /* Score & Timer Styling */
@@ -45,23 +66,9 @@ body {
 
 /* Game Title */
 #game-title {
-    font-size: 32px;
+    font-size: 28px;
     color: yellow;
     text-shadow: 3px 3px 5px black;
-}
-
-/* Patient Information Box */
-#patient-info {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px auto;
-    width: 80%;
-    color: white;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* Triage Buttons */
