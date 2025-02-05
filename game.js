@@ -20,7 +20,8 @@ class TriageGame {
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
         // 🎵 Load arcade music
-        this.music = new Audio("arcade_music.mp3"); // Use .mp3 for better browser support
+ this.music = new Audio("https://yourusername.github.io/triage-game/arcade_music.mp3");
+
         this.music.loop = true;
         this.music.volume = 0.5;
     }
