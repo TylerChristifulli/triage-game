@@ -3,7 +3,7 @@ class Patient {
         this.symptoms = symptoms;
         this.mentation = mentation;
         this.pulse = pulse;
-        this.severity = severity; // Correct triage category
+        this.severity = severity;
     }
 }
 
@@ -18,38 +18,42 @@ class TriageGame {
         this.playerName = "";
         this.highScore = localStorage.getItem("highScore") || 0;
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+        // 🎵 Load arcade music
+        this.music = new Audio("arcade_music.mp3"); // Use .mp3 for better browser support
+        this.music.loop = true;
+        this.music.volume = 0.5;
     }
 
     loadPatients() {
         this.patients = [
-            // Critical (Red) Patients
             new Patient("Car accident, unconscious, irregular breathing", "Unresponsive", "Abnormal", "Red"),
             new Patient("Severe head injury, GCS 6, irregular breathing", "Unresponsive", "Abnormal", "Red"),
             new Patient("Gunshot wound to the chest, labored breathing, weak pulse", "Unresponsive", "Abnormal", "Red"),
             new Patient("Severe burns over 50% of body, unresponsive", "Unresponsive", "Abnormal", "Red"),
             new Patient("Penetrating abdominal trauma, hypotensive, barely conscious", "Unresponsive", "Abnormal", "Red"),
-
-            // Delayed (Yellow) Patients
             new Patient("Femur fracture, alert, strong pulses, unable to walk", "Alert", "Normal", "Yellow"),
             new Patient("Partial-thickness burns over both arms, alert", "Alert", "Normal", "Yellow"),
             new Patient("Open tibia fracture with controlled bleeding, alert", "Alert", "Normal", "Yellow"),
             new Patient("Moderate head injury, confused but responding to voice", "Voice", "Normal", "Yellow"),
-            new Patient("Chest contusion, mild respiratory distress, SpO2 93%", "Alert", "Mildly Abnormal", "Yellow"),
-
-            // Minor (Green) Patients
             new Patient("Small laceration on hand, no significant bleeding", "Alert", "Normal", "Green"),
             new Patient("Sprained ankle, able to walk with assistance", "Alert", "Normal", "Green"),
             new Patient("Mild concussion, headache but no loss of consciousness", "Alert", "Normal", "Green"),
             new Patient("Superficial burns on forearm, no airway issues", "Alert", "Normal", "Green"),
             new Patient("Bruised ribs, normal vitals, able to walk", "Alert", "Normal", "Green"),
-
-            // Expectant (Black) Patients
             new Patient("Crushed chest, no pulse, not breathing", "Unresponsive", "No Pulse", "Black"),
             new Patient("Massive head trauma, brain matter exposed, no response", "Unresponsive", "No Pulse", "Black"),
             new Patient("Full cardiac arrest, asystole, no signs of life", "Unresponsive", "No Pulse", "Black"),
             new Patient("Severe burn injuries covering entire body, no response", "Unresponsive", "No Pulse", "Black"),
             new Patient("Hanging victim, no pulse, rigor mortis present", "Unresponsive", "No Pulse", "Black")
         ];
+    }
+
+    shufflePatients() {
+        for (let i = this.patients.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [this.patients[i], this.patients[j]] = [this.patients[j], this.patients[i]];
+        }
     }
 
     startGame() {
@@ -60,20 +64,28 @@ class TriageGame {
             return;
         }
 
-        this.playerName = playerName; // Store player name
+        this.playerName = playerName;
 
-        // Hide the name input and start button after starting
+        // Hide the name input and start button
         document.getElementById("player-input").style.display = "none";
 
         this.score = 0;
         this.timer = 30;
         this.currentPatientIndex = 0;
 
+        // Shuffle patient order for randomness
+        this.shufflePatients();
+
         // Reset UI
         document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
         document.getElementById("score").textContent = `Score: ${this.score}`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
-        document.getElementById("leaderboard").innerHTML = ""; // Clear leaderboard display
+        document.getElementById("leaderboard").innerHTML = "";
+
+        // 🎵 Start arcade music after user interaction
+        this.music.play().catch(error => {
+            console.error("Music play blocked by browser:", error);
+        });
 
         this.startTimer();
         this.displayPatient();
@@ -94,7 +106,7 @@ class TriageGame {
 
     displayPatient() {
         if (this.currentPatientIndex >= this.patients.length) {
-            this.currentPatientIndex = 0; // Loop back to start of patients
+            this.currentPatientIndex = 0;
         }
 
         const patient = this.patients[this.currentPatientIndex];
@@ -124,18 +136,15 @@ class TriageGame {
 
         let percentage = (this.score / 100) * 100;
 
-        // Save to leaderboard
         this.leaderboard.push({ name: this.playerName, score: percentage.toFixed(2) + "%" });
         this.leaderboard.sort((a, b) => b.score - a.score);
         localStorage.setItem("leaderboard", JSON.stringify(this.leaderboard));
 
-        // Save high score if it's the best
         if (this.score > this.highScore) {
             this.highScore = this.score;
             localStorage.setItem("highScore", this.highScore);
         }
 
-        // Display leaderboard
         let leaderboardHTML = `<h2>🏆 Leaderboard</h2>`;
         this.leaderboard.forEach(entry => {
             leaderboardHTML += `<p>${entry.name}: ${entry.score}</p>`;
@@ -144,11 +153,14 @@ class TriageGame {
         document.getElementById("leaderboard").innerHTML = leaderboardHTML;
         document.getElementById("patient-info").innerHTML = `<h2>🎉 Time's Up! Final Score: ${this.score}</h2>`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
-        
-        // Show the input box and start button again for a new game
+
+        // 🎵 Stop the music when the game ends
+        this.music.pause();
+        this.music.currentTime = 0;
+
         document.getElementById("player-input").style.display = "block";
     }
 }
 
 const game = new TriageGame();
-window.game = game; // Make game accessible globally
+window.game = game;
