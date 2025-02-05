@@ -18,12 +18,6 @@ class TriageGame {
         this.playerName = "";
         this.highScore = localStorage.getItem("highScore") || 0;
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-        // 🎵 Load arcade music with autoplay fixes
-        this.music = new Audio("https://TylerChristifulli.github.io/triage-game/arcade_music.mp3");
-        this.music.loop = true;
-        this.music.volume = 1.0;
-        this.music.muted = false; // Ensure it's not muted
     }
 
     loadPatients() {
@@ -83,21 +77,6 @@ class TriageGame {
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
         document.getElementById("leaderboard").innerHTML = "";
 
-        // 🎵 Ensure the music is unmuted and play after user interaction
-        this.music.muted = false;
-        this.music.volume = 1.0;
-        this.music.play().then(() => {
-            console.log("Music started successfully! 🎶");
-        }).catch(error => {
-            console.error("Music play blocked by browser:", error);
-            alert("Click anywhere on the page to start the music!");
-            
-            // Listen for a user interaction and retry
-            document.body.addEventListener("click", () => {
-                this.music.play();
-            }, { once: true });
-        });
-
         this.startTimer();
         this.displayPatient();
     }
@@ -122,9 +101,9 @@ class TriageGame {
 
         const patient = this.patients[this.currentPatientIndex];
         document.getElementById("patient-info").innerHTML = `
-            <p style="font-size: 22px; color: #ffcc00;"><strong>📝 Appearance:</strong> ${patient.appearance}</p>
-            <p style="font-size: 20px; color: #ff6666;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
-            <p style="font-size: 20px; color: #66ff66;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
+            <p style="font-size: 22px; color: #ffcc00; text-align: left;"><strong>👁️ Appearance:</strong> ${patient.appearance}</p>
+            <p style="font-size: 20px; color: #ff6666; text-align: left;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
+            <p style="font-size: 20px; color: #66ff66; text-align: left;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
         `;
     }
 
@@ -156,18 +135,10 @@ class TriageGame {
             localStorage.setItem("highScore", this.highScore);
         }
 
-        let leaderboardHTML = `<h2>🏆 Leaderboard</h2>`;
-        this.leaderboard.forEach(entry => {
-            leaderboardHTML += `<p>${entry.name}: ${entry.score}</p>`;
-        });
+        document.getElementById("leaderboard").innerHTML = `<h2>🏆 Leaderboard</h2>` +
+            this.leaderboard.map(entry => `<p>${entry.name}: ${entry.score}</p>`).join('');
 
-        document.getElementById("leaderboard").innerHTML = leaderboardHTML;
         document.getElementById("patient-info").innerHTML = `<h2>🎉 Time's Up! Final Score: ${this.score}</h2>`;
-        document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
-
-        // 🎵 Stop the music when the game ends
-        this.music.pause();
-        this.music.currentTime = 0;
 
         document.getElementById("player-input").style.display = "block";
     }
