@@ -40,6 +40,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             width: 50%;
             position: relative;
+            border: 2px solid white; /* White outline */
         }
 
         /* Style patient info */
@@ -49,6 +50,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             color: black;
+            border: 2px solid white; /* White outline */
         }
 
         /* Triage Buttons */
@@ -96,6 +98,7 @@
     <script src="game.js"></script>
 </body>
 </html>
+
 
 const game = new TriageGame();
 game.displayPatient();
