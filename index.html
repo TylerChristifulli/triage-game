@@ -20,7 +20,7 @@
             overflow: hidden;
         }
 
-        /* Overlay to Reduce Brightness */
+        /* Overlay */
         body::before {
             content: "";
             position: absolute;
@@ -43,15 +43,33 @@
             position: relative;
         }
 
-        /* Patient Info Box */
-        #patient-info {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            color: black;
+        /* Player Input */
+        #player-input {
             margin-bottom: 20px;
+        }
+
+        #player-name {
+            padding: 10px;
             font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+        }
+
+        #start-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        #start-button:hover {
+            background-color: #218838;
         }
 
         /* Score & Timer */
@@ -107,20 +125,33 @@
 <body>
     <div id="game-container">
         <h1>🚑 RAMP Triage Training Game</h1>
+        
+        <!-- Player Name Input -->
+        <div id="player-input">
+            <input type="text" id="player-name" placeholder="Enter Your Name">
+            <button id="start-button" onclick="game.startGame()">Start Game</button>
+        </div>
+
         <div id="scoreboard">
             <p id="timer">Time Left: 30s</p>
             <p id="score">Score: 0</p>
             <p id="high-score">High Score: 0</p>
         </div>
+
         <div id="patient-info"></div>
+
         <div id="triage-buttons">
             <button class="triage-button red" onclick="game.triage('Red')"></button>
             <button class="triage-button yellow" onclick="game.triage('Yellow')"></button>
             <button class="triage-button green" onclick="game.triage('Green')"></button>
             <button class="triage-button black" onclick="game.triage('Black')"></button>
         </div>
+
+        <div id="leaderboard"></div>
     </div>
+
     <script src="game.js"></script>
 </body>
 </html>
+
 
