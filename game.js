@@ -1,56 +1,31 @@
-class Patient {
-    constructor(symptoms, mentation, pulse, severity) {
-        this.symptoms = symptoms;
-        this.mentation = mentation;
-        this.pulse = pulse;
-        this.severity = severity; // Correct triage category
-    }
-}
-
 class TriageGame {
     constructor() {
         this.patients = [];
         this.loadPatients();
         this.currentPatientIndex = 0;
         this.score = 0;
-        this.timer = 30; // 30-second timer
+        this.timer = 30;
         this.timerInterval = null;
-        this.highScore = localStorage.getItem("highScore") || 0; // Retrieve stored high score
+        this.highScore = localStorage.getItem("highScore") || 0;
+        this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     }
 
     loadPatients() {
         this.patients.push(new Patient("Car accident, unconscious, irregular breathing", "Unresponsive", "Abnormal", "Red"));
         this.patients.push(new Patient("Walking with minor cuts, talking normally", "Alert", "Normal", "Green"));
-        this.patients.push(new Patient("Severe burns, groaning but responsive to voice", "Voice", "Abnormal", "Yellow"));
-        this.patients.push(new Patient("Crushed chest, no pulse, not breathing", "Unresponsive", "Abnormal", "Black"));
-    }
-
-    displayPatient() {
-        if (this.currentPatientIndex >= this.patients.length) {
-            this.currentPatientIndex = 0; // Loop back to the start of patients
-        }
-
-        const patient = this.patients[this.currentPatientIndex];
-        document.getElementById("patient-info").innerHTML = `
-            <p><strong>📝 Symptoms:</strong> ${patient.symptoms}</p>
-            <p><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
-            <p><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
-        `;
     }
 
     startGame() {
         this.score = 0;
         this.timer = 30;
         this.currentPatientIndex = 0;
-        document.getElementById("score").textContent = `Score: ${this.score}`;
-        document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
         document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
-        this.displayPatient();
         this.startTimer();
+        this.displayPatient();
     }
 
     startTimer() {
-        clearInterval(this.timerInterval); // Clear any existing timers
+        clearInterval(this.timerInterval);
         this.timerInterval = setInterval(() => {
             if (this.timer > 0) {
                 this.timer--;
@@ -63,34 +38,29 @@ class TriageGame {
     }
 
     triage(severity) {
-        if (this.timer <= 0) return; // Prevent scoring after time runs out
-
-        const patient = this.patients[this.currentPatientIndex];
-
-        if (severity === patient.severity) {
+        if (this.timer <= 0) return;
+        if (severity === this.patients[this.currentPatientIndex].severity) {
             this.score += 10;
             document.getElementById("score").textContent = `Score: ${this.score}`;
         }
-
         this.currentPatientIndex++;
         this.displayPatient();
     }
 
     endGame() {
-        clearInterval(this.timerInterval); // Stop the timer when the game ends
-        if (this.score > this.highScore) {
-            this.highScore = this.score;
-            localStorage.setItem("highScore", this.highScore);
-        }
-
-        document.getElementById("patient-info").innerHTML = `<h2>🎉 Time's Up! Final Score: ${this.score}</h2>`;
-        document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
+        let playerName = document.getElementById("player-name").value || "Anonymous";
+        let percentage = (this.score / 100) * 100;
+        this.leaderboard.push({ name: playerName, score: percentage.toFixed(2) + "%" });
+        this.leaderboard.sort((a, b) => b.score - a.score);
+        localStorage.setItem("leaderboard", JSON.stringify(this.leaderboard));
+        
+        let leaderboardHTML = `<h2>🏆 Leaderboard</h2>`;
+        this.leaderboard.forEach(entry => {
+            leaderboardHTML += `<p>${entry.name}: ${entry.score}</p>`;
+        });
+        document.getElementById("leaderboard").innerHTML = leaderboardHTML;
     }
 }
 
-// Ensure the game starts when the page loads
-window.onload = () => {
-    const game = new TriageGame();
-    game.startGame();
-    window.game = game; // Ensure `game` is accessible globally
-};
+const game = new TriageGame();
+
