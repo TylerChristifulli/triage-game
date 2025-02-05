@@ -19,7 +19,6 @@ class TriageGame {
         this.highScore = localStorage.getItem("highScore") || 0;
         this.leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-        // Ensure UI is reset when page loads
         document.getElementById("player-input").style.display = "block";
         document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
         document.getElementById("score").textContent = `Score: ${this.score}`;
@@ -66,18 +65,13 @@ class TriageGame {
         }
 
         this.playerName = playerName;
-
-        // Hide the name input and start button
         document.getElementById("player-input").style.display = "none";
 
         this.score = 0;
         this.timer = 30;
         this.currentPatientIndex = 0;
-
-        // Shuffle patient order for randomness
         this.shufflePatients();
 
-        // Reset UI
         document.getElementById("timer").textContent = `Time Left: ${this.timer}s`;
         document.getElementById("score").textContent = `Score: ${this.score}`;
         document.getElementById("high-score").textContent = `High Score: ${this.highScore}`;
@@ -152,3 +146,8 @@ class TriageGame {
 
 const game = new TriageGame();
 window.game = game;
+
+// Ensure the start button triggers the game correctly
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("start-button").addEventListener("click", () => game.startGame());
+});
