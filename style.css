@@ -71,8 +71,7 @@ body {
     text-shadow: 3px 3px 5px black;
 }
 
-/* Triage Buttons */
-/* Remove default hover effect */
+/* Triage Buttons (Fixed Hover Effect) */
 .triage-button {
     width: 80px;
     height: 80px;
@@ -84,23 +83,21 @@ body {
     transition: transform 0.2s ease-in-out;
 }
 
-/* Individual hover colors matching each button */
+/* Ensure buttons keep their correct colors on hover */
+.red { background-color: red; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+.black { background-color: black; }
+
 .red:hover { background-color: darkred; }
 .yellow:hover { background-color: gold; }
 .green:hover { background-color: darkgreen; }
 .black:hover { background-color: grey; }
 
-/* Add a cool hover effect (button pops slightly) */
+/* Slight pop effect on hover */
 .triage-button:hover {
     transform: scale(1.1);
 }
-
-}
-
-.red { background-color: red; }
-.yellow { background-color: yellow; }
-.green { background-color: green; }
-.black { background-color: black; }
 
 /* Player Input & Start Button */
 #player-input {
