@@ -1,6 +1,6 @@
 class Patient {
-    constructor(symptoms, mentation, pulse, severity) {
-        this.symptoms = symptoms;
+    constructor(appearance, mentation, pulse, severity) {
+        this.appearance = appearance;
         this.mentation = mentation;
         this.pulse = pulse;
         this.severity = severity;
@@ -22,7 +22,7 @@ class TriageGame {
         // 🎵 Load arcade music with autoplay fixes
         this.music = new Audio("https://TylerChristifulli.github.io/triage-game/arcade_music.mp3");
         this.music.loop = true;
-        this.music.volume = 1.0; // Max volume
+        this.music.volume = 1.0;
         this.music.muted = false; // Ensure it's not muted
     }
 
@@ -90,6 +90,12 @@ class TriageGame {
             console.log("Music started successfully! 🎶");
         }).catch(error => {
             console.error("Music play blocked by browser:", error);
+            alert("Click anywhere on the page to start the music!");
+            
+            // Listen for a user interaction and retry
+            document.body.addEventListener("click", () => {
+                this.music.play();
+            }, { once: true });
         });
 
         this.startTimer();
@@ -116,9 +122,9 @@ class TriageGame {
 
         const patient = this.patients[this.currentPatientIndex];
         document.getElementById("patient-info").innerHTML = `
-            <p><strong>📝 Symptoms:</strong> ${patient.symptoms}</p>
-            <p><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
-            <p><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
+            <p style="font-size: 22px; color: #ffcc00;"><strong>📝 Appearance:</strong> ${patient.appearance}</p>
+            <p style="font-size: 20px; color: #ff6666;"><strong>🧠 Mentation:</strong> ${patient.mentation}</p>
+            <p style="font-size: 20px; color: #66ff66;"><strong>❤️ Pulse:</strong> ${patient.pulse}</p>
         `;
     }
 
