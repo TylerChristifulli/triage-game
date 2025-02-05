@@ -94,7 +94,7 @@ body {
 .red:hover { background-color: darkred; }
 .yellow:hover { background-color: gold; }
 .green:hover { background-color: darkgreen; }
-.black:hover { background-color: grey; }
+.black:hover { background-color: black; }
 
 /* Slight pop effect on hover */
 .triage-button:hover {
